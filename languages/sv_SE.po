@@ -1,0 +1,301 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Iwata v1.06\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-09-28 06:54:35+0000\n"
+"Last-Translator: anders <anders@andersnoren.se>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: SWEDEN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: 404.php:23
+#@ iwata
+msgid "It seems like you have tried to open a page that doesn't exist. It could have been deleted, moved, or it never existed at all. You are welcome to search for what you are looking for with the form below."
+msgstr "Det vekar som att du har försökt öppna en sida som inte existerar. Den kan ha raderats, flyttats, eller har aldrig existerat överhuvudtaget. Du är välkommen att söka efter det du letar efter genom formuläret nedan."
+
+#: archive.php:10
+#, php-format
+#@ iwata
+msgid "Date: %s"
+msgstr "Datum: %s"
+
+#: archive.php:12
+#, php-format
+#@ iwata
+msgid "Month: %s"
+msgstr "Månad: %s"
+
+#: archive.php:12
+#@ iwata
+msgctxt "F = Month, Y = Year"
+msgid "F Y"
+msgstr "F Y"
+
+#: archive.php:14
+#, php-format
+#@ iwata
+msgid "Year: %s"
+msgstr "År: %s"
+
+#: archive.php:14
+#@ iwata
+msgctxt "Y = Year"
+msgid "Y"
+msgstr "Y"
+
+#: archive.php:16
+#, php-format
+#@ iwata
+msgid "Category: %s"
+msgstr "Kategori: %s"
+
+#: archive.php:18
+#, php-format
+#@ iwata
+msgid "Tag: %s"
+msgstr "Etikett: %s"
+
+#: archive.php:21
+#, php-format
+#@ iwata
+msgid "Author: %s"
+msgstr "Författare: %s"
+
+#: archive.php:23
+#@ iwata
+msgid "Archive"
+msgstr "Arkiv"
+
+#. gettext fix: identical singular and plural forms found, that may be ambiguous! Please check the code!
+#: comments.php:14
+#: comments.php:95
+#: functions.php:169
+#@ iwata
+msgid "Comment"
+msgid_plural "Comments"
+msgstr[0] "kommentar"
+msgstr[1] "kommentarer"
+
+#: comments.php:39
+#@ iwata
+msgid "Pingback"
+msgid_plural "Pingbacks"
+msgstr[0] "Pingback"
+msgstr[1] "Pingbacks"
+
+#: comments.php:57
+#@ iwata
+msgid "Older Comments"
+msgstr "Äldre kommentarer"
+
+#: comments.php:63
+#@ iwata
+msgid "Newer Comments"
+msgstr "Nyare kommentarer"
+
+#: comments.php:103
+#@ iwata
+msgid "Name"
+msgstr "Namn"
+
+#: comments.php:109
+#@ iwata
+msgid "Email"
+msgstr "E-postadress"
+
+#: comments.php:115
+#@ iwata
+msgid "Website"
+msgstr "Webbplats"
+
+#: footer.php:7
+#@ iwata
+msgid "Theme by"
+msgstr "Tema av"
+
+#: functions.php:231
+#@ iwata
+msgid "Pingback:"
+msgstr "Pingback:"
+
+#: functions.php:231
+#@ iwata
+msgid "(Edit)"
+msgstr "(Redigera)"
+
+#: functions.php:263
+#@ iwata
+msgid "Your comment is awaiting moderation."
+msgstr "Din kommentar inväntar moderering"
+
+#: functions.php:173
+#: functions.php:285
+#@ iwata
+msgid "Edit"
+msgstr "Redigera"
+
+#: functions.php:276
+#@ iwata
+msgid "Reply"
+msgstr "Svara"
+
+#: functions.php:328
+#@ iwata
+msgid "Accent Color"
+msgstr "Accentfärg"
+
+#: page.php:77
+#: single.php:97
+#@ iwata
+msgid "We couldn't find any posts that matched your query. Please try again."
+msgstr "Vi kunde inte hitta några inlägg som matchar din sökning. Vänligen försök igen."
+
+#: search.php:56
+#@ iwata
+msgid "No results. Try again, would you kindly?"
+msgstr "Inga resultat. Försök gärna igen."
+
+#: functions.php:37
+#@ iwata
+msgid "Primary Menu"
+msgstr "Huvudmeny"
+
+#: functions.php:107
+#@ iwata
+msgid "Read more"
+msgstr "Läs mer"
+
+#: header.php:44
+#@ iwata
+msgid "Click to view the navigation"
+msgstr "Klicka för att visa menyn"
+
+#: page.php:43
+#: single.php:37
+#@ iwata
+msgid "Pages:"
+msgstr "Sidor:"
+
+#: header.php:83
+#: header.php:113
+#: searchform.php:2
+#@ iwata
+msgid "Type and press enter"
+msgstr "Skriv och tryck enter"
+
+#: 404.php:11
+#@ iwata
+msgid "Thank you Mario!<br/>But our princess is in another castle!"
+msgstr "Thank you Mario!<br/>But our princess is in another castle!"
+
+#: footer.php:9
+#@ iwata
+msgid "Go back to the top"
+msgstr "Tillbaka till toppen"
+
+#: functions.php:169
+#@ iwata
+msgid "Add Comment"
+msgstr "Kommentera"
+
+#: functions.php:169
+#@ iwata
+msgid "Comments"
+msgstr "Kommentarer"
+
+#: header.php:40
+#@ iwata
+msgid "Click to view the search field"
+msgstr "Klicka för att visa sökformuläret"
+
+#: functions.php:306
+#@ iwata
+msgid "Options for Iwata"
+msgstr "Inställningar för Iwata"
+
+#: functions.php:309
+#@ iwata
+msgid "Allows you to customize theme settings for Iwata."
+msgstr "Låter dig ändra inställningarna för Iwata."
+
+#: functions.php:248
+#@ iwata
+msgid "at"
+msgstr "kl."
+
+#: comments.php:81
+#@ iwata
+msgid "Comments are closed"
+msgstr "Kommentarsfältet är stängt"
+
+#: single.php:75
+#@ iwata
+msgid "Previous Post"
+msgstr "Föregående inlägg"
+
+#: single.php:84
+#@ iwata
+msgid "Next Post"
+msgstr "Nästa inlägg"
+
+#: functions.php:190
+#@ iwata
+msgid "Older"
+msgstr "Äldre"
+
+#: functions.php:190
+#: functions.php:196
+#@ iwata
+msgid "Posts"
+msgstr "inlägg"
+
+#: functions.php:196
+#@ iwata
+msgid "Newer"
+msgstr "Nyare"
+
+#: functions.php:211
+#@ iwata
+msgid "Load More"
+msgstr "Ladda fler"
+
+#: search.php:13
+#: search.php:37
+#@ iwata
+msgid "Search Results:"
+msgstr "Sökresultat:"
+
+#: functions.php:160
+#@ iwata
+msgid "Sticky"
+msgstr "Klistrat"
+
+#: functions.php:160
+#@ iwata
+msgid "Post"
+msgstr "inlägg"
+
+#: functions.php:194
+#: search.php:44
+#, php-format
+#@ iwata
+msgid "Page %s of %s"
+msgstr "Sida %s av %s"
+
+#: functions.php:251
+#@ iwata
+msgid "Post Author"
+msgstr "Inläggsförfattare"
+
