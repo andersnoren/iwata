@@ -36,11 +36,11 @@
 						
 						printf( __( 'Search Results: "%s"', 'iwata' ), get_search_query() );
 					
-						$paged = get_query_var( 'paged' ) ?: 1;
+						$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 						
 						if ( 1 < $wp_query->max_num_pages ) : ?>
 						
-							<span>(<?php printf( __( 'Page %s of %s', 'iwata' ), $paged, $wp_query->max_num_pages ); ?>)</span>
+							<span>(<?php printf( __( 'Page %1$s of %2$s', 'iwata' ), $paged, $wp_query->max_num_pages ); ?>)</span>
 						
 						<?php endif; ?>
 						

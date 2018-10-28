@@ -33,6 +33,28 @@ Source: https://github.com/dachcom-digital/jquery-doubletaptogo
 
 == Changelog ==
 
+Version 1.15 (2018-10-28)
+-------------------------
+- Fixed incorrect colors being used in style.css for Gutenberg color settings
+- Fixed the wrong default accent color being used in the Gutenberg editor styles
+
+Version 1.14 (2018-10-27)
+-------------------------
+- Updated with Gutenberg support
+	- Gutenberg editor styles
+	- Styling of Gutenberg blocks
+	- Custom Iwata Gutenberg palette
+	- Custom Iwata Gutenberg typography styles
+- Added option to disable Google Fonts with a translateable string
+- Updated theme description
+- Improved compatibility with < PHP 5.5
+- Removed the languages sub folder, since that is handled by WordPress.org
+- Adjustments to contrast
+
+Version 1.13 (2018-05-24)
+-------------------------
+- Fixed output of cookie checkbox in comments
+
 Version 1.12 (2017-12-03)
 -------------------------
 - Updated comments structure in functions.php

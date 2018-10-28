@@ -1,7 +1,8 @@
 <?php 
 
-if ( post_password_required() ) 
+if ( post_password_required() ) {
 	return;
+}
 
 if ( have_comments() ) : ?>
 
@@ -79,15 +80,15 @@ if ( have_comments() ) : ?>
 		
 	</div><!-- .comments-container -->
 	
-<?php endif; ?>
+<?php endif;
 
-<?php if ( ! comments_open() && ! is_page() ) : ?>
+if ( ! comments_open() && ! is_page() ) : ?>
 
 	<p class="no-comments"><?php _e( 'Comments are closed', 'iwata' ); ?></p>
 	
-<?php endif; ?>
+<?php endif;
 
-<?php $comments_args = array(
+$comments_args = array(
 
 	'comment_notes_before' => 
 		'',
@@ -100,29 +101,8 @@ if ( have_comments() ) : ?>
 			<label for="comment">' . __( 'Comment', 'iwata' ) . '</label>
 			<textarea id="comment" name="comment" cols="45" rows="6" required></textarea>
 		</p>',
-	
-	'fields' => apply_filters( 'comment_form_default_fields', array(
-	
-		'author' =>
-			'<p class="comment-form-author">
-				<label for="author">' . __( 'Name', 'iwata' ) . ( $req ? '<span class="required">*</span>' : '' ) . '</label> 
-				<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" />
-			</p>',
-		
-		'email' =>
-			'<p class="comment-form-email">
-				<label for="email">' . __( 'Email', 'iwata' ) . ( $req ? '<span class="required">*</span>' : '' ) . '</label> 
-				<input id="email" name="email" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" />
-			</p>',
-		
-		'url' =>
-			'<p class="comment-form-url">
-				<label for="url">' . __( 'Website', 'iwata' ) . '</label>
-				<input id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" />
-			</p>' )
-	),
 );
 
-comment_form($comments_args);
+comment_form( $comments_args );
 
 ?>
