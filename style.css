@@ -5,7 +5,7 @@
 	Theme Name: Iwata
     Text Domain: iwata
 	Theme URI: http://www.andersnoren.se/teman/iwata-wordpress-theme/
-	Version: 1.15
+	Version: 1.18
 	Description: Iwata is a clean, colorful and lightweight theme for bloggers. It features responsive design, great typography, the aside, quote and image post formats, Gutenberg support, editor styles, Jetpack infinite scroll, custom accent color, custom background color and custom header image. Demo: http://www.andersnoren.se/themes/iwata/
 	Tags: blog, one-column, custom-colors, custom-menu, editor-style, featured-images, post-formats, sticky-post, theme-options, threaded-comments, translation-ready
 	Author: Anders Norén
@@ -66,8 +66,6 @@ ol, ul, li { list-style: none; }
 
 blockquote:before, blockquote:after { content: ""; }
 
-a { outline: none; }
-
 input[type=search] {
    -moz-appearance: none;
    -webkit-appearance: none;
@@ -110,8 +108,8 @@ body a:hover {
 }
 
 * { 
-	-webkit-box-sizing: border-box; 
-	-moz-box-sizing: border-box; 
+		-webkit-box-sizing: border-box; 
+		-moz-box-sizing: border-box; 
 	box-sizing: border-box; 
 	-webkit-font-smoothing: subpixel-antialiased;
 }
@@ -296,14 +294,21 @@ body a,
 
 /* Search Toggle ---------------------------------------- */
 
+.nav-toggle,
+.search-toggle {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	background: transparent;
+	box-shadow: none;
+}
 
 .search-toggle {
+	color: rgba( 255, 255, 255, .7 );
 	display: block;
 	font-size: 22px;
-	color: rgba(255,255,255,0.7);
 	position: absolute;
-	bottom: -4px;
-	right: 0;	
+		bottom: -4px;
+		right: 0;	
 }
 
 .search-toggle:hover,
@@ -336,6 +341,13 @@ body a,
 }
 
 .header-search .search-field:focus { outline: none; }
+
+.header-search button.screen-reader-text:focus {
+	left: auto;
+	right: 0;
+	top: 50%;
+	transform: translateY( -50% );
+}
 
 
 /* -------------------------------------------------------------------------------- */
@@ -402,10 +414,6 @@ body a,
 	top: 30px;
 	opacity: 0;
 	z-index: 999;
-	-webkit-transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out;
-	 -moz-transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out;
-	 -ms-transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out;
-	 -o-transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out;
 	 transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out;
 }
 
@@ -451,9 +459,6 @@ body a,
 	display: block;
 	padding: 20px;
 	line-height: 130%;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
 	border-bottom: 1px solid rgba(255,255,255,0.075);
 	font-size: 1rem;
 	font-style: italic;
@@ -1637,11 +1642,14 @@ li.comment { position: relative; }
 	font-weight: 400;
 }
 
-.page-title-meta { margin-top: 8px; }
+.page-title-meta { 
+	margin-top: 8px; 
+}
 
 .page-title-meta p {
-	font-size: 0.9em;
 	color: #999;
+	font-size: 0.9em;
+	line-height: 1.5;
 }
 
 
@@ -1740,9 +1748,6 @@ img#wpstats { display: none !important } /* silly wp stats */
 		left: 50%;
 		margin-left: -10px;
 		top: 50%;
-		-webkit-transition: opacity 0.2s linear 0.2s, margin 0.2s linear 0.2s, -webkit-transform 0.2s linear 0s;
-		-moz-transition: opacity 0.2s linear 0.2s, margin 0.2s linear 0.2s, -moz-transform 0.2s linear 0s;
-		-o-transition: opacity 0.2s linear 0.2s, margin 0.2s linear 0.2s, -o-transform 0.2s linear 0s;
 		transition: opacity 0.2s linear 0.2s, margin 0.2s linear 0.2s, transform 0.2s linear 0s;
 	}
 	
@@ -1758,9 +1763,6 @@ img#wpstats { display: none !important } /* silly wp stats */
 	
 	.nav-toggle.active .bar { 
 		background: #00A0D7; 
-		-webkit-transition: opacity 0.2s linear 0s, margin 0.2s linear 0s, -webkit-transform 0.2s linear 0.2s;
-		-moz-transition: opacity 0.2s linear 0s, margin 0.2s linear 0s, -moz-transform 0.2s linear 0.2s;
-		-o-transition: opacity 0.2s linear 0s, margin 0.2s linear 0s, -o-transform 0.2s linear 0.2s;
 		transition: opacity 0.2s linear 0s, margin 0.2s linear 0s, transform 0.2s linear 0.2s;
 	}
 	
@@ -1768,20 +1770,14 @@ img#wpstats { display: none !important } /* silly wp stats */
 	.nav-toggle.active .bar:nth-child(3) { margin-top: -1px; }
 	
 	.nav-toggle.active .bar:nth-child(1) {
-		-webkit-transform: rotate(45deg);
-		-moz-transform: rotate(45deg);
 		transform: rotate(45deg);
 	}
 	
 	.nav-toggle.active .bar:nth-child(2) { 
-		-webkit-opacity: 0;
-		-moz-opacity: 0;
 		opacity: 0; 
 	}
 	
 	.nav-toggle.active .bar:nth-child(3) {
-		-webkit-transform: rotate(-45deg);
-		-moz-transform: rotate(-45deg);
 		transform: rotate(-45deg);
 	}
 	

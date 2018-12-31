@@ -80,7 +80,8 @@ if ( have_comments() ) : ?>
 		
 	</div><!-- .comments-container -->
 	
-<?php endif;
+	<?php 
+endif;
 
 if ( ! comments_open() && ! is_page() ) : ?>
 

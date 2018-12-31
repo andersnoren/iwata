@@ -290,7 +290,7 @@ if ( ! function_exists( 'iwata_post_meta' ) ) {
 
 	function iwata_post_meta() { ?>
 
-		<?php if ( ! is_page() || comments_open() || current_user_can( 'edit_posts' ) ) : ?>
+		<?php if ( is_single() || comments_open() || current_user_can( 'edit_posts' ) ) : ?>
 		
 			<div class="post-meta">
 					
@@ -298,7 +298,7 @@ if ( ! function_exists( 'iwata_post_meta' ) ) {
 					<p class="post-sticky is-sticky"><span class="fa fw fa-thumb-tack"></span><?php echo __( 'Sticky', 'iwata' ) . '<span> ' . __( 'Post', 'iwata' ) . '</span>'; ?></p>
 				<?php endif; ?>
 				
-				<?php if ( !is_page() ) : ?>
+				<?php if ( get_post_type() == 'post' ) : ?>
 					<p class="post-date"><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><span class="fa fw fa-calendar"></span><?php the_time(get_option( 'date_format' ) ); ?></a></p>
 				<?php endif; ?>
 				
@@ -312,7 +312,8 @@ if ( ! function_exists( 'iwata_post_meta' ) ) {
 				
 			</div><!-- .post-meta -->
 			
-		<?php endif;
+			<?php 
+		endif;
 	}
 
 }

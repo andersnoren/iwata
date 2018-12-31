@@ -27,17 +27,17 @@
 					
 				<?php endif; ?>
 				
-				<a class="search-toggle" title="<?php _e( 'Click to view the search field', 'iwata' ); ?>" href="#">
+				<button type="button" class="search-toggle" title="<?php _e( 'Click to view the search field', 'iwata' ); ?>" href="#">
 					<span class="fa fw fa-search"></span>
-				</a>
+				</button>
 				
-				<a class="nav-toggle hidden" title="<?php _e( 'Click to view the navigation', 'iwata' ); ?>" href="#">
+				<button type="button" class="nav-toggle hidden" title="<?php _e( 'Click to view the navigation', 'iwata' ); ?>" href="#">
 					<div class="bars">
 						<div class="bar"></div>
 						<div class="bar"></div>
 						<div class="bar"></div>
 					</div>
-				</a><!-- .nav-toggle -->
+				</button><!-- .nav-toggle -->
 				
 				<ul class="main-menu">
 					
@@ -74,6 +74,7 @@
 		<form method="get" class="header-search section hidden" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 			<div class="section-inner">
 				<input class="search-field" type="search" placeholder="<?php _e( 'Type and press enter', 'iwata' ); ?>" name="s" /> 
+				<button type="submit" class="screen-reader-text"><?php _e( 'Search', 'iwata' ); ?></button>
 			</div><!-- .section-inner -->
 		</form><!-- .header-search -->
 		
