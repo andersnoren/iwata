@@ -290,7 +290,7 @@ if ( ! function_exists( 'iwata_post_meta' ) ) {
 
 	function iwata_post_meta() { ?>
 
-		<?php if ( is_single() || comments_open() || current_user_can( 'edit_posts' ) ) : ?>
+		<?php if ( get_post_type() == 'post' || comments_open() || current_user_can( 'edit_posts' ) ) : ?>
 		
 			<div class="post-meta">
 					

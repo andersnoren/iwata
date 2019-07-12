@@ -2,7 +2,7 @@
 Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 4.4
-Tested up to: 5.0
+Tested up to: 5.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -32,6 +32,16 @@ Source: https://github.com/dachcom-digital/jquery-doubletaptogo
 
 
 == Changelog ==
+
+Version 1.20 (2019-07-12)
+-------------------------
+- Fixed bug in the post meta conditional
+- Added theme tags
+- Updated "Tested up to"
+
+Version 1.19 (2019-04-07)
+-------------------------
+- Added the new wp_body_open() function, along with a function_exists check
 
 Version 1.18 (2018-12-20)
 -------------------------

@@ -12,6 +12,12 @@
 	</head>
 	
 	<body <?php body_class(); ?>>
+
+		<?php 
+		if ( function_exists( 'wp_body_open' ) ) {
+			wp_body_open(); 
+		}
+		?>
 	
 		<div class="header section<?php if ( get_header_image() ) : ?> bg-image" style="background-image: url(<?php header_image(); ?>);<?php endif; ?>">
 			
