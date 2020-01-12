@@ -33,6 +33,14 @@ Source: https://github.com/dachcom-digital/jquery-doubletaptogo
 
 == Changelog ==
 
+Version 1.21 (2019-07-21)
+-------------------------
+- Added skip link
+- Don't show comments if the post is password protected
+- Don't show the post thumbnail if the post is password protected
+- Fixed font issues in the block editor styles
+- Better main menu display
+
 Version 1.20 (2019-07-12)
 -------------------------
 - Fixed bug in the post meta conditional

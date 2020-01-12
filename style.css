@@ -5,7 +5,7 @@
 	Theme Name: Iwata
     Text Domain: iwata
 	Theme URI: https://www.andersnoren.se/teman/iwata-wordpress-theme/
-	Version: 1.20
+	Version: 1.21
 	Description: Iwata is a clean, colorful and lightweight theme for bloggers. It features responsive design, great typography, the aside, quote and image post formats, Block Editor/Gutenberg support, editor styles, Jetpack infinite scroll, custom accent color, custom background color and custom header image. Demo: https://www.andersnoren.se/themes/iwata/
 	Tags: blog, one-column, custom-colors, custom-menu, editor-style, featured-images, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 	Author: Anders Norén
@@ -163,6 +163,20 @@ img {
 	z-index: 100000; /* Above WP toolbar. */
 }
 
+/* Skip Link */
+
+.skip-link {
+	position: absolute;
+		left: -9999rem;
+		top: 2.5rem;
+	z-index: 999999999;
+}
+
+.skip-link:focus {
+	left: 2.5rem;
+	text-decoration: none;
+}
+
 
 /* Transitions ------------------------------------------ */
 
@@ -215,36 +229,41 @@ body a,
 
 /* Buttons ---------------------------------------------- */
 
-
-.post-content input[type="submit"],
-.post-content input[type="reset"],
-.post-content input[type="button"],
-.comment-form input[type="submit"] {
-	display: inline-block;
-	padding: 16px 20px 15px 20px;
-	border-radius: 3px;
-	border: none;
+.button,
+.faux-button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+input[type="submit"] {
 	background: #00A0D7;
+	border: none;
+	border-radius: 3px;
+	color: #fff;
+	display: inline-block;
 	font-family: inherit;
 	font-size: 0.9em;
 	line-height: 1;
 	font-weight: 500;
-	color: #fff;
+	margin: 0;
+	padding: 16px 20px 15px 20px;
+	-moz-appearance: none;
 	-webkit-appearance: none;
 }
 
-.post-content input[type="submit"] + input[type="reset"],
-.post-content input[type="submit"] + input[type="reset"],
-.post-content input[type="reset"] + input[type="submit"],
-.post-content input[type="reset"] + input[type="button"],
-.post-content input[type="button"] + input[type="button"],
-.post-content input[type="button"] + input[type="reset"],
-.post-content input[type="button"] + input[type="submit"] { margin-left: 8px; }
+input[type="submit"] + input[type="reset"],
+input[type="submit"] + input[type="reset"],
+input[type="reset"] + input[type="submit"],
+input[type="reset"] + input[type="button"],
+input[type="button"] + input[type="button"],
+input[type="button"] + input[type="reset"],
+input[type="button"] + input[type="submit"] { margin-left: 8px; }
 
-.post-content input[type="submit"]:hover,
-.post-content input[type="reset"]:hover,
-.post-content input[type="button"]:hover,
-.comment-form input[type="submit"]:hover {
+.button:hover,
+.faux-button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover {
 	cursor: pointer;
 	color: #fff;
 	text-decoration: underline;
@@ -356,15 +375,17 @@ body a,
 
 
 .main-menu {
-	margin: 0 48px 0 33.33%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	margin: -10px 48px 0 calc( 33.33% - 30px );
 	float: none;
 }
 
 .main-menu li { position: relative; }
 
 .main-menu > li { 
-	float: left; 
-	margin-right: 30px;
+	margin: 10px 0 0 30px;
 }
 
 .main-menu > li > a {
@@ -1488,6 +1509,10 @@ li.comment { position: relative; }
 	font-style: italic;
 	text-align: center;
 	color: #757575;
+}
+
+.comments-container + .no-comments {
+	margin-top: 40px;
 }
 
 

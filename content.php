@@ -6,7 +6,7 @@
 
 	if ( $post_format === 'standard' ) :
 	
-		if ( has_post_thumbnail() ) : ?>
+		if ( has_post_thumbnail() && ! post_password_required() ) : ?>
 		
 			<div class="featured-media">
 				

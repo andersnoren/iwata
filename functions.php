@@ -519,9 +519,11 @@ class iwata_customize {
 			self::iwata_generate_css( '.post-content a:hover', 'color', 'accent_color' );
 			self::iwata_generate_css( '.post-content blockquote:before', 'color', 'accent_color' );
 			self::iwata_generate_css( '.post-content a.more-link,', 'background', 'accent_color' );
-			self::iwata_generate_css( '.post-content input[type="submit"]', 'background', 'accent_color' );
-			self::iwata_generate_css( '.post-content input[type="reset"]', 'background', 'accent_color' );
-			self::iwata_generate_css( '.post-content input[type="button"]', 'background', 'accent_color' );
+			self::iwata_generate_css( '.button', 'background', 'accent_color' );
+			self::iwata_generate_css( '.faux-button', 'background', 'accent_color' );
+			self::iwata_generate_css( 'input[type="submit"]', 'background', 'accent_color' );
+			self::iwata_generate_css( 'input[type="reset"]', 'background', 'accent_color' );
+			self::iwata_generate_css( 'input[type="button"]', 'background', 'accent_color' );
 			self::iwata_generate_css( '.post-content fieldset legend', 'background', 'accent_color' );
 
 			self::iwata_generate_css( '.post-content .has-accent-color', 'color', 'accent_color' );

@@ -18,6 +18,8 @@
 			wp_body_open(); 
 		}
 		?>
+
+		<a class="skip-link button" href="#site-content"><?php _e( 'Skip to the content', 'iwata' ); ?></a>
 	
 		<div class="header section<?php if ( get_header_image() ) : ?> bg-image" style="background-image: url(<?php header_image(); ?>);<?php endif; ?>">
 			
@@ -102,3 +104,5 @@
 			<input class="search-field" type="search" placeholder="<?php _e( 'Type and press enter', 'iwata' ); ?>" name="s" /> 
 			<a class="search-button" onclick="document.getElementById( 'search-form' ).submit(); return false;"><span class="fa fw fa-search"></span></a>
 		</form><!-- .mobile-search -->
+
+		<main id="site-content">

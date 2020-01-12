@@ -1,3 +1,5 @@
+</main><!-- #site-content -->
+
 <div class="section footer bg-accent">
 	
 	<div class="section-inner">
