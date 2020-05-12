@@ -8,12 +8,10 @@
 		
 			<div class="post-header">
 			
-				<h2 class="post-title"><?php _e( 'The page could not be found', 'iwata' ); ?></h2>
+				<h1 class="post-title"><?php _e( 'The page could not be found', 'iwata' ); ?></h1>
 				
 				<div class="post-meta">
-					
 					<p><span class="fa fw fa-times-circle"></span><?php _e( 'Error 404', 'iwata' ); ?></p>
-					
 				</div>
 														
 			</div><!-- .post-header -->

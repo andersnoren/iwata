@@ -5,59 +5,50 @@
 	<div class="section-inner">
 											        
 		<?php 
-		
 		if ( have_posts() ) : 
+			while ( have_posts() ) : 
 			
-			while ( have_posts() ) : the_post(); 
-			
+				the_post(); 
+
 				?>
 			
-				<div id="post-<?php the_ID(); ?>" <?php post_class( 'post single' ); ?>>
+				<div id="post-<?php the_ID(); ?>" <?php post_class( 'single' ); ?>>
 
 					<?php if ( has_post_thumbnail() ) : ?>
-					
-						<div class="featured-media">	
-							
-							<?php the_post_thumbnail( 'post-image' ); ?>
-							
-						</div><!-- .featured-media -->
-							
+						<figure class="featured-media">	
+							<?php the_post_thumbnail(); ?>
+						</figure><!-- .featured-media -->
 					<?php endif; ?>
 					
 					<div class="post-header">
 						
-						<?php 
-						
+						<?php
 						the_title( '<h1 class="post-title">', '</h1>' );
-						
 						iwata_post_meta();
-						
 						?>
 								
 					</div><!-- .post-header -->
 					
-					<div class="post-content">
-					
-						<?php the_content(); ?>
-					
-					</div>
+					<div class="post-content entry-content">
+						<?php 
+						the_content(); 
+						edit_post_link();
+						?>
+					</div><!-- .post-content -->
 					
 					<?php 
-					$link_pages_args = array(
+				
+					wp_link_pages( array(
 						'after'            => '</p>',
-						'before'           => '<div class="clear"></div><p class="page-links"><span class="title">' . __( 'Pages:', 'iwata' ) . '</span>',
+						'before'           => '<p class="page-links"><span class="title">' . __( 'Pages:', 'iwata' ) . '</span>',
 						'echo'             => 1,
 						'link_after'       => '</span>',
 						'link_before'      => '<span>',
 						'pagelink'         => '%',
 						'separator'        => '',
-					);
-				
-					wp_link_pages( $link_pages_args );
+					) );
 
-					?>
-
-					<?php if ( is_single() ) : ?>
+					if ( is_single() ) : ?>
 					
 						<div class="post-meta bottom">
 										
@@ -75,31 +66,26 @@
 							
 						</div><!-- .post-meta.bottom -->
 					
-						<div class="post-navigation">
+						<div class="post-navigation group">
 						
 							<?php
 							$prev_post = get_previous_post();
 							$next_post = get_next_post();
 							
-							if ( ! empty( $next_post ) ) : ?>
-								
-								<a class="prev-post" title="<?php echo esc_attr( get_the_title( $next_post ) ); ?>" href="<?php echo get_permalink( $next_post->ID ); ?>">
+							if ( $next_post ) : ?>
+								<a class="prev-post" href="<?php the_permalink( $next_post->ID ); ?>">
 									<p><?php _e( 'Previous Post', 'iwata' ); ?></p>
 									<h4><?php echo get_the_title( $next_post ); ?></h4>
 								</a>
-						
-							<?php endif;
+							<?php endif; ?>
 							
-							if ( ! empty( $prev_post ) ): ?>
-							
-								<a class="next-post" title="<?php echo esc_attr( get_the_title( $prev_post ) ); ?>" href="<?php echo get_permalink( $prev_post->ID ); ?>">
+							<?php if ( $prev_post ): ?>
+								<a class="next-post" href="<?php the_permalink( $prev_post->ID ); ?>">
 									<p><?php _e( 'Next Post', 'iwata' ); ?></p>
 									<h4><?php echo get_the_title( $prev_post ); ?></h4>
 								</a>
 							<?php endif; ?>
-							
-							<div class="clear"></div>
-							
+
 						</div><!-- .post-navigation -->
 
 					<?php endif; ?>
@@ -107,11 +93,8 @@
 				</div><!-- .post -->
 																				
 				<?php
-
 			endwhile; 
-
 		endif; 
-		
 		?>
 		
 	</div><!-- .section-inner -->

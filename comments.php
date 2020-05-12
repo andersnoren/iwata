@@ -1,8 +1,6 @@
 <?php 
 
-if ( post_password_required() ) {
-	return;
-}
+if ( post_password_required() ) return;
 
 if ( have_comments() ) : ?>
 
@@ -12,15 +10,14 @@ if ( have_comments() ) : ?>
 		
 		<div class="comments-title-container">
 			
-			<h3 class="comments-title">
+			<h3 class="comments-title group">
 			
 				<?php 
 				$comment_count = count( $wp_query->comments_by_type['comment'] );
-				echo $comment_count . ' ' . _n( 'Comment', 'Comments', $comment_count, 'iwata' ); ?>
+				echo $comment_count . ' ' . _n( 'Comment', 'Comments', $comment_count, 'iwata' ); 
+				?>
 				
 			</h3>
-			
-			<div class="clear"></div>
 		
 		</div><!-- .comments-title-container -->
 	
@@ -40,9 +37,10 @@ if ( have_comments() ) : ?>
 								
 					<h3 class="pingbacks-title">
 					
-					<?php 
-					$pingback_count = count( $wp_query->comments_by_type['pings'] );
-					echo $pingback_count . ' ' . _n( 'Pingback', 'Pingbacks', $pingback_count, 'iwata' ); ?>
+						<?php 
+						$pingback_count = count( $wp_query->comments_by_type['pings'] );
+						echo $pingback_count . ' ' . _n( 'Pingback', 'Pingbacks', $pingback_count, 'iwata' ); 
+						?>
 					
 					</h3>
 				
@@ -56,22 +54,9 @@ if ( have_comments() ) : ?>
 					
 			<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
 				
-				<div class="comments-nav" role="navigation">
-				
-					<div class="fleft">
-										
-						<?php previous_comments_link( '&laquo; ' . __( 'Older Comments', 'iwata' ) ); ?>
-					
-					</div>
-					
-					<div class="fright">
-					
-						<?php next_comments_link( __( 'Newer Comments', 'iwata' ) . ' &raquo;' ); ?>
-					
-					</div>
-					
-					<div class="clear"></div>
-					
+				<div class="comments-nav group" role="navigation">
+					<div class="fleft"><?php previous_comments_link( '&laquo; ' . __( 'Older Comments', 'iwata' ) ); ?></div>
+					<div class="fright"><?php next_comments_link( __( 'Newer Comments', 'iwata' ) . ' &raquo;' ); ?></div>
 				</div><!-- .comment-nav-below -->
 				
 			<?php endif; ?>
@@ -82,12 +67,6 @@ if ( have_comments() ) : ?>
 	
 	<?php 
 endif;
-
-if ( ! comments_open() && ! is_page() ) : ?>
-
-	<p class="no-comments"><?php _e( 'Comments are closed', 'iwata' ); ?></p>
-	
-<?php endif;
 
 $comments_args = array(
 

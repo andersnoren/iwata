@@ -2,7 +2,7 @@
 Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 4.4
-Tested up to: 5.2
+Tested up to: 5.4.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -32,6 +32,44 @@ Source: https://github.com/dachcom-digital/jquery-doubletaptogo
 
 
 == Changelog ==
+
+Version 2.0.0 (2020-05-XX)
+-------------------------
+- Added the new `/assets/` folder.
+- Moved JavaScript, editor styles, and FontAwesome files to the new assets folder.
+- Changed doubleTapToGo to be a dependency for `global.js`.
+- Added the version to enqueues, for cache busting.
+- Replaced the `post-image` size with use of the post thumbnail size, updated to match size.
+- Removed a admin style fix for post thumbnail max width that is no longer needed.
+- Moved the `Iwata_Customize` class to the new `/inc/classes/` folder.
+- Made `Iwata_Customize` pluggable.
+- Renamed functions in `Iwata_Customize` to not be prefixed.
+- Removed live preview from the Customizer.
+- Removed unused "Theme Options" section in the Customizer.
+– Cleaned up Customizer code.
+- Removed unused enqueue of Genericons from the block editor styles.
+- Renamed the "Regular" Gutenberg font size to "Normal" to match expected naming scheme.
+- Removed license.txt.
+- Updated featured image wrapper to use the `figure` element.
+- Added `edit_post_link()` to end of `the_content()` on singular.
+- Changed archive titles to use the `h1` element.
+- Removed output of "Comments are closed" message.
+- Restructured CSS reset.
+- Updated old post content styles to style all elements, and grouped them in the Element Base CSS section.
+- Moved block styles to their own CSS section, above the Entry Content CSS section.
+- Added pseudo clearing classes and replaced old element clearing.
+- Moved pagination from a function in `functions.php` to the new `pagination.php` file, to better fit expected structure.
+- Added output of archive description, updated structure of archive header.
+- Moved adjustments of archive title and archive description to filters in `functions.php`.
+- Better block styles.
+- Overall CSS cleanup.
+- Updated CSS table of contents.
+- Only output the CSS for the custom accent color if it differs from the default.
+- Added base block margins, improved block styles overall.
+- Bumped "Tested up to" to 5.4.1.
+- Changed the file format of `screenshot.png` to JPG, reducing file size by 300 KB.
+- Updated theme description.
+- Cleaned up block editor styles.
 
 Version 1.21 (2019-07-21)
 -------------------------

@@ -21,25 +21,27 @@
 
 		<a class="skip-link button" href="#site-content"><?php _e( 'Skip to the content', 'iwata' ); ?></a>
 	
-		<div class="header section<?php if ( get_header_image() ) : ?> bg-image" style="background-image: url(<?php header_image(); ?>);<?php endif; ?>">
+		<header class="header section<?php if ( get_header_image() ) : ?> bg-image" style="background-image: url(<?php header_image(); ?>);<?php endif; ?>">
 			
 			<div class="cover bg-accent"></div>
 		
-			<div class="section-inner">
+			<div class="section-inner group">
 						
 				<?php if ( get_bloginfo( 'title' ) ) : ?>
 			
 					<h2 class="blog-title">
-						<a href="<?php echo esc_url( home_url() ); ?>" title="<?php echo esc_attr( get_bloginfo( 'title' ) ); ?> &mdash; <?php echo esc_attr( get_bloginfo( 'description' ) ); ?>" rel="home"><?php echo esc_attr( get_bloginfo( 'title' ) ); ?></a>
+						<a href="<?php echo esc_url( home_url() ); ?>" rel="home"><?php echo esc_attr( get_bloginfo( 'title' ) ); ?></a>
 					</h2>
 					
 				<?php endif; ?>
 				
-				<button type="button" class="search-toggle" title="<?php _e( 'Click to view the search field', 'iwata' ); ?>" href="#">
+				<button type="button" class="search-toggle">
 					<span class="fa fw fa-search"></span>
+					<span class="screen-reader-text"><?php _e( 'Click to view the search field', 'iwata' ); ?></span>
 				</button>
 				
-				<button type="button" class="nav-toggle hidden" title="<?php _e( 'Click to view the navigation', 'iwata' ); ?>" href="#">
+				<button type="button" class="nav-toggle hidden">
+					<span class="screen-reader-text"><?php _e( 'Click to view the navigation', 'iwata' ); ?></span>
 					<div class="bars">
 						<div class="bar"></div>
 						<div class="bar"></div>
@@ -71,13 +73,11 @@
 						
 					} ?>
 					
-				 </ul>
-				
-				 <div class="clear"></div>
+				 </ul><!-- .main-menu -->
 			
 			</div><!-- .section-inner -->
 							
-		</div><!-- .header -->
+		</header><!-- .header -->
 		
 		<form method="get" class="header-search section hidden" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 			<div class="section-inner">
@@ -89,13 +89,11 @@
 		<ul class="mobile-menu hidden">			
 			
 			<?php 
-			
 			if ( has_nav_menu( 'primary' ) ) {											
 				wp_nav_menu( $menu_args ); 
 			} else {
 				wp_list_pages( $list_pages_args );
 			} 
-			
 			?>
 			
 		</ul><!-- .mobile-menu -->

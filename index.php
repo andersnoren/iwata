@@ -6,28 +6,22 @@
 
 		<?php 
 
-		$archive_title = '';
+		$archive_title = get_the_archive_title();
+		$archive_description = get_the_archive_description();
 
-		if ( is_archive() ) {
-			$archive_title = get_the_archive_title();
-		} elseif ( is_search() ) {
-			$archive_title = sprintf( __( 'Search Results: "%s"', 'iwata' ), get_search_query() );
-		}
+		if ( $archive_title || $archive_description ) : ?>
 
-		if ( $archive_title ) : ?>
-
-			<div class="page-title">
+			<header class="archive-header">
 			
-				<h4><?php echo $archive_title; ?></h4>
+				<?php if ( $archive_title ) : ?>
+					<h1 class="archive-title"><?php echo $archive_title; ?></h1>
+				<?php endif; ?>
 				
-				<?php
-				$tag_description = tag_description();
-				if ( ! empty( $tag_description ) ) {
-					echo apply_filters( 'tag_archive_meta', '<div class="page-title-meta">' . $tag_description . '</div>' );
-				}
-				?>
+				<?php if ( $archive_description ) : ?>
+					<div class="archive-description"><?php echo wp_kses_post( wpautop( $archive_description ) ); ?></div>
+				<?php endif; ?>
 				
-			</div><!-- .page-title -->
+			</header><!-- .archive-header -->
 
 		<?php endif; ?>
 																	                    
@@ -48,22 +42,15 @@
 		<?php elseif ( is_search() ) : ?>
 
 			<div class="post">
-					
 				<div class="post-content">
-				
-					<p><?php _e( 'No results. Try again, would you kindly?', 'iwata' ); ?></p>
-					
+					<p><?php _e( 'You can give it another try through the search form below.', 'iwata' ); ?></p>
 					<?php get_search_form(); ?>
-				
 				</div><!-- .post-content -->
-				
-				<div class="clear"></div>
-			
 			</div><!-- .post -->
 
 		<?php endif; ?>
 		
-		<?php iwata_archive_navigation(); ?>
+		<?php get_template_part( 'pagination' ); ?>
 	
 	</div><!-- .section-inner -->
 		

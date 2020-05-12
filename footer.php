@@ -1,6 +1,6 @@
 </main><!-- #site-content -->
 
-<div class="section footer bg-accent">
+<footer class="section footer bg-accent">
 	
 	<div class="section-inner">
 		
@@ -8,11 +8,11 @@
 				 
 		<p class="credits"><?php _e( 'Theme by', 'iwata' ); ?> <a href="https://www.andersnoren.se">Anders Nor&eacute;n</a></p>
 		
-		<a href="#" title="<?php _e( 'Go back to the top', 'iwata' ); ?>" class="to-the-top"><span class="fa fw fa-arrow-up"></span></a>
+		<a href="#" class="to-the-top"><span class="fa fw fa-arrow-up"></span><span class="screen-reader-text"><?php _e( 'Go back to the top', 'iwata' ); ?></span></a>
 				
 	</div><!-- .section-inner -->
 	
-</div><!-- .footer.section -->
+</footer><!-- .footer.section -->
 
 <?php wp_footer(); ?>
 

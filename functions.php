@@ -5,9 +5,7 @@
    THEME SETUP
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'iwata_setup' ) ) {
-
+if ( ! function_exists( 'iwata_setup' ) ) :
 	function iwata_setup() {
 		
 		// Automatic feed
@@ -15,7 +13,7 @@ if ( ! function_exists( 'iwata_setup' ) ) {
 		
 		// Post thumbnails
 		add_theme_support( 'post-thumbnails' ); 
-		add_image_size( 'post-image', 688, 9999 );
+		set_post_thumbnail_size( 688, 9999 );
 		
 		// Post Formats
 		add_theme_support( 'post-formats', array( 'aside', 'image', 'quote' ) );
@@ -26,21 +24,22 @@ if ( ! function_exists( 'iwata_setup' ) ) {
 		) );
 		
 		// Custom header
-		$args = array(
-			'width'         => 1440,
-			'height'        => 198,
-			'uploads'       => true,
-			'header-text'  	=> false
+		add_theme_support( 'custom-header', array(
+			'header-text'	=> false,
+			'height'		=> 198,
+			'uploads'		=> true,
+			'width'			=> 1440,
 			
-		);
-		add_theme_support( 'custom-header', $args );
+		) );
 
 		// Content width
 		global $content_width;
 		if ( ! isset( $content_width ) ) $content_width = 640;
 		
 		// Custom background
-		add_theme_support( "custom-background", array( 'default-color' => 'f6f6f6' ) ); 
+		add_theme_support( 'custom-background', array( 
+			'default-color'	=> 'f6f6f6' 
+		) ); 
 		
 		// Add nav menu
 		register_nav_menu( 'primary', __( 'Primary Menu', 'iwata' ) );
@@ -59,79 +58,47 @@ if ( ! function_exists( 'iwata_setup' ) ) {
 		
 	}
 	add_action( 'after_setup_theme', 'iwata_setup' );
+endif;
 
-}
+
+/* ---------------------------------------------------------------------------------------------
+   INCLUDE REQUIRED FILES
+   --------------------------------------------------------------------------------------------- */
+
+// Customizer class
+require get_template_directory() . '/inc/classes/class-iwata-customize.php';
 
 
 /* ---------------------------------------------------------------------------------------------
    REGISTER AND ENQUEUE SCRIPTS
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'iwata_load_javascript_files' ) ) {
-
+if ( ! function_exists( 'iwata_load_javascript_files' ) ) :
 	function iwata_load_javascript_files() {
+		
+		$theme_version = wp_get_theme( 'iwata' )->get( 'Version' );
 
-		if ( ! is_admin() ) {
-			wp_enqueue_script( 'iwata_doubletap', get_template_directory_uri().'/js/doubletaptogo.js', array( 'jquery' ), '', true );
-			wp_enqueue_script( 'iwata_global', get_template_directory_uri().'/js/global.js', array( 'jquery' ), '', true );
-			
-			if ( is_singular() && get_option( 'thread_comments' ) ) wp_enqueue_script( 'comment-reply' );
-			
-		}
+		wp_register_script( 'iwata_doubletap', get_template_directory_uri() . '/assets/js/doubletaptogo.js' );
+		wp_enqueue_script( 'iwata_global', get_template_directory_uri() . '/assets/js/global.js', array( 'jquery', 'iwata_doubletap' ), $theme_version, true );
+		
+		if ( is_singular() && get_option( 'thread_comments' ) ) wp_enqueue_script( 'comment-reply' );
+
 	}
 	add_action( 'wp_enqueue_scripts', 'iwata_load_javascript_files' );
-
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    REGISTER AND ENQUEUE STYLES
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'iwata_load_style' ) ) {
-
+if ( ! function_exists( 'iwata_load_style' ) ) :
 	function iwata_load_style() {
-		if ( ! is_admin() ) {
 
-			$dependencies = array();
+		if ( is_admin() ) return;
 
-			/**
-			 * Translators: If there are characters in your language that are not
-			 * supported by the theme fonts, translate this to 'off'. Do not translate
-			 * into your own language.
-			 */
-			$google_fonts = _x( 'on', 'Google Fonts: on or off', 'iwata' );
-
-			if ( 'off' !== $google_fonts ) {
-
-				// Register Google Fonts
-				wp_register_style( 'iwata_googleFonts', '//fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic,500italic,700italic' );
-				$dependencies[] = 'iwata_googleFonts';
-
-			}
-
-			wp_register_style( 'iwata_fontawesome', get_template_directory_uri() . '/fa/css/font-awesome.css' );
-			$dependencies[] = 'iwata_fontawesome';
-
-			wp_enqueue_style( 'iwata_style', get_stylesheet_uri(), $dependencies );
-		}
-	}
-	add_action( 'wp_print_styles', 'iwata_load_style' );
-
-}
-
-
-/* ---------------------------------------------------------------------------------------------
-   ADD EDITOR STYLES
-   --------------------------------------------------------------------------------------------- */
-
-
-if ( ! function_exists( 'iwata_add_editor_styles' ) ) {
-
-	function iwata_add_editor_styles() {
-		add_editor_style( 'iwata-editor-styles.css' );
+		$theme_version = wp_get_theme( 'iwata' )->get( 'Version' );
+		$dependencies = array();
 
 		/**
 		 * Translators: If there are characters in your language that are not
@@ -141,31 +108,58 @@ if ( ! function_exists( 'iwata_add_editor_styles' ) ) {
 		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'iwata' );
 
 		if ( 'off' !== $google_fonts ) {
+			wp_register_style( 'iwata_googleFonts', '//fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic,500italic,700italic' );
+			$dependencies[] = 'iwata_googleFonts';
+		}
 
+		wp_register_style( 'iwata_fontawesome', get_template_directory_uri() . '/assets/fonts/fa/css/font-awesome.css' );
+		$dependencies[] = 'iwata_fontawesome';
+
+		wp_enqueue_style( 'iwata_style', get_stylesheet_uri(), $dependencies, $theme_version );
+
+	}
+	add_action( 'wp_print_styles', 'iwata_load_style' );
+endif;
+
+
+/* ---------------------------------------------------------------------------------------------
+   ADD EDITOR STYLES
+   --------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'iwata_add_editor_styles' ) ) :
+	function iwata_add_editor_styles() {
+
+		add_editor_style( 'assets/css/iwata-classic-editor-styles.css' );
+
+		/**
+		 * Translators: If there are characters in your language that are not
+		 * supported by the theme fonts, translate this to 'off'. Do not translate
+		 * into your own language.
+		 */
+		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'iwata' );
+
+		if ( 'off' !== $google_fonts ) {
 			$font_url = '//fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic,500italic,700italic';
 			add_editor_style( str_replace( ', ', '%2C', $font_url ) );
-
 		}
 
 	}
 	add_action( 'init', 'iwata_add_editor_styles' );
-
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    CHECK WHETHER THE BROWSER SUPPORTS JS
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'iwata_html_js_class' ) ) {
-
+if ( ! function_exists( 'iwata_html_js_class' ) ) :
 	function iwata_html_js_class () {
+
 		echo '<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>'. "\n";
+
 	}
 	add_action( 'wp_head', 'iwata_html_js_class', 1 );
-
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -173,121 +167,90 @@ if ( ! function_exists( 'iwata_html_js_class' ) ) {
    --------------------------------------------------------------------------------------------- */
 
 
-if ( ! function_exists( 'iwata_posts_link_attributes_1' ) ) {
+if ( ! function_exists( 'iwata_next_posts_link_attributes' ) ) :
+	function iwata_next_posts_link_attributes() { 
 
-	function iwata_posts_link_attributes_1() { 
 		return 'class="archive-nav-older"'; 
+
 	}
-	add_filter( 'next_posts_link_attributes', 'iwata_posts_link_attributes_1' );
+	add_filter( 'next_posts_link_attributes', 'iwata_next_posts_link_attributes' );
+endif;
 
-}
 
+if ( ! function_exists( 'iwata_previous_posts_link_attributes' ) ) :
+	function iwata_previous_posts_link_attributes() { 
 
-if ( ! function_exists( 'iwata_posts_link_attributes_2' ) ) {
-
-	function iwata_posts_link_attributes_2() { 
 		return 'class="archive-nav-newer"'; 
-	}
-	add_filter( 'previous_posts_link_attributes', 'iwata_posts_link_attributes_2' );
 
-}
+	}
+	add_filter( 'previous_posts_link_attributes', 'iwata_previous_posts_link_attributes' );
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    CUSTOM MORE LINK TEXT
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'iwata_custom_more_link' ) ) {
-
+if ( ! function_exists( 'iwata_custom_more_link' ) ) :
 	function iwata_custom_more_link( $more_link, $more_link_text ) {
+
 		return str_replace( $more_link_text, __( 'Read more', 'iwata' ), $more_link );
+
 	}
 	add_filter( 'the_content_more_link', 'iwata_custom_more_link', 10, 2 );
-
-}
-
-
-/* ---------------------------------------------------------------------------------------------
-   STYLE THE ADMIN AREA
-   --------------------------------------------------------------------------------------------- */
-
-
-if ( ! function_exists( 'iwata_admin_style' ) ) {
-
-	function iwata_admin_style() { ?>
-		<style type="text/css">
-			#postimagediv #set-post-thumbnail img {
-				max-width: 100%;
-				height: auto;
-			}
-		</style>
-		<?php
-	}
-	add_action( 'admin_head', 'iwata_admin_style' );
-
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    SET EXCERPT LENGTH
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'iwata_custom_excerpt_length' ) ) {
-
+if ( ! function_exists( 'iwata_custom_excerpt_length' ) ) :
 	function iwata_custom_excerpt_length( $length ) {
+
 		return 33;
+
 	}
 	add_filter( 'excerpt_length', 'iwata_custom_excerpt_length', 999 );
-
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    SET EXCERPT SUFFIX
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'iwata_new_excerpt_more' ) ) {
-
+if ( ! function_exists( 'iwata_new_excerpt_more' ) ) :
 	function iwata_new_excerpt_more( $more ) {
+
 		return '...';
+
 	}
 	add_filter( 'excerpt_more', 'iwata_new_excerpt_more' );
-
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    ADD POST CLASSES
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'iwata_post_classes' ) ) {
-
+if ( ! function_exists( 'iwata_post_classes' ) ) :
 	function iwata_post_classes( $classes ) {
 
-		// Is search
-		if ( is_search() ) {
-			$classes[] = 'post';
-		}
+		// Always include the "post" class, used for styling
+		$classes[] = 'post';
 
 		return $classes; 
 
 	}
 	add_filter( 'post_class', 'iwata_post_classes' );
-
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    POST META FUNCTION
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'iwata_post_meta' ) ) {
-
+if ( ! function_exists( 'iwata_post_meta' ) ) :
 	function iwata_post_meta() { ?>
 
 		<?php if ( get_post_type() == 'post' || comments_open() || current_user_can( 'edit_posts' ) ) : ?>
@@ -299,7 +262,7 @@ if ( ! function_exists( 'iwata_post_meta' ) ) {
 				<?php endif; ?>
 				
 				<?php if ( get_post_type() == 'post' ) : ?>
-					<p class="post-date"><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><span class="fa fw fa-calendar"></span><?php the_time(get_option( 'date_format' ) ); ?></a></p>
+					<p class="post-date"><a href="<?php the_permalink(); ?>"><span class="fa fw fa-calendar"></span><?php the_time(get_option( 'date_format' ) ); ?></a></p>
 				<?php endif; ?>
 				
 				<?php if ( comments_open() ) : ?>
@@ -314,73 +277,92 @@ if ( ! function_exists( 'iwata_post_meta' ) ) {
 			
 			<?php 
 		endif;
+
 	}
-
-}
-
-
-/* ---------------------------------------------------------------------------------------------
-   ARCHIVE NAVIGATION FUNCTION
-   --------------------------------------------------------------------------------------------- */
-
-
-if ( ! function_exists( 'iwata_archive_navigation' ) ) {
-
-	function iwata_archive_navigation() {
-		
-		global $wp_query;
-		
-		if ( $wp_query->max_num_pages > 1 ) : ?>
-					
-			<div class="archive-nav">
-				
-				<?php echo get_next_posts_link( __( 'Older', 'iwata' ) . '<span> ' . __( 'Posts', 'iwata' ) . '</span> &raquo;' ); ?>
-				
-				<?php global $paged; ?>
-				
-				<div class="page-number"><?php printf( __( 'Page %1$s of %2$s', 'iwata' ), $paged, $wp_query->max_num_pages ); ?></div>
-							
-				<?php echo get_previous_posts_link( '&laquo; ' . __( 'Newer', 'iwata' ) . '<span> ' .__( 'Posts', 'iwata' ) . '</span>' ); ?>
-				
-				<div class="clear"></div>
-					
-			</div><!-- .archive-nav-->
-							
-		<?php endif;
-	}
-
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    MODIFY JETPACK INFINITE SCROLL TEXT
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'iwata_custom_jetpack_infinite_more' ) ) {
-
+if ( ! function_exists( 'iwata_custom_jetpack_infinite_more' ) ) :
 	function iwata_custom_jetpack_infinite_more() { 
-		if ( is_home() || is_archive() ) { ?>
+
+		if ( is_home() || is_archive() ) : 
+			?>
+
 			<script type="text/javascript">
 				//<![CDATA[
 				infiniteScroll.settings.text = "<?php _e( 'Load More', 'iwata' ); ?>";
 				//]]>
 			</script> 
+
 			<?php
-		}
+		endif;
+
 	}
 	add_action( 'wp_footer', 'iwata_custom_jetpack_infinite_more', 3 );
+endif;
 
-}
+
+
+
+/*	-----------------------------------------------------------------------------------------------
+	FILTER ARCHIVE TITLE
+
+	@param	$title string		The initial title
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'iwata_filter_archive_title' ) ) :
+	function iwata_filter_archive_title( $title ) {
+
+		// On search, show the search query.
+		if ( is_search() ) {
+			$title = sprintf( _x( 'Search: %s', '%s = The search query', 'iwata' ), '&ldquo;' . get_search_query() . '&rdquo;' );
+		}
+
+		return $title;
+
+	}
+	add_filter( 'get_the_archive_title', 'iwata_filter_archive_title' );
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	FILTER ARCHIVE DESCRIPTION
+
+	@param	$description string		The initial description
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'iwata_filter_archive_description' ) ) :
+	function iwata_filter_archive_description( $description ) {
+
+		// On search, show a string describing the results of the search.
+		if ( is_search() ) {
+			global $wp_query;
+			if ( $wp_query->found_posts ) {
+				/* Translators: %s = Number of results */
+				$description = sprintf( _nx( 'We found %s result for your search.', 'We found %s results for your search.',  $wp_query->found_posts, '%s = Number of results', 'iwata' ), $wp_query->found_posts );
+			} else {
+				$description = __( 'We could not find any results for your search.', 'iwata' );
+			}
+		}
+
+		return $description;
+
+	}
+	add_filter( 'get_the_archive_description', 'iwata_filter_archive_description' );
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
    IWATA COMMENT FUNCTION
    --------------------------------------------------------------------------------------------- */
 
-
-if ( ! function_exists( 'iwata_comment' ) ) {
+if ( ! function_exists( 'iwata_comment' ) ) :
 	function iwata_comment( $comment, $args, $depth ) {
+
 		switch ( $comment->comment_type ) :
 			case 'pingback' :
 			case 'trackback' :
@@ -405,23 +387,21 @@ if ( ! function_exists( 'iwata_comment' ) ) {
 					<h4><?php echo get_comment_author_link(); ?></h4>
 					
 					<div class="comment-meta">
-						<a class="comment-date-link" href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ) ?>" title="<?php echo get_comment_date() . ' at ' . get_comment_time(); ?>"><?php echo get_comment_date() . '<span> ' . __( 'at', 'iwata' ) . ' ' . get_comment_time() . '</span>'; ?></a>
+
+						<a class="comment-date-link" href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ) ?>"><?php echo get_comment_date() . '<span> ' . __( 'at', 'iwata' ) . ' ' . get_comment_time() . '</span>'; ?></a>
+
 						<?php if ( $comment->user_id === $post->post_author ) : ?>
-						
 							<div class="post-author-text"><span>&bull;</span><?php _e( 'Post Author', 'iwata' ); ?></div>
-						
 						<?php endif; ?>
 						
-					</div>
+					</div><!-- .comment-meta -->
 				
 				</div><!-- .comment-header -->
 
 				<div class="comment-content post-content">
 				
 					<?php if ( '0' == $comment->comment_approved ) : ?>
-					
 						<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'iwata' ); ?></p>
-						
 					<?php endif; ?>
 				
 					<?php comment_text(); ?>
@@ -431,21 +411,17 @@ if ( ! function_exists( 'iwata_comment' ) ) {
 				<div class="comment-actions">
 					
 					<?php 
-						comment_reply_link( 
-							array_merge( 
-								$args, 
-								array( 
-									'reply_text' 	=>  '<span class="fa fw fa-reply"></span>' . __( 'Reply', 'iwata' ), 
-									'depth'			=> 	$depth, 
-									'max_depth' 	=> 	$args['max_depth'],
-									'before'		=>	'<p class="comment-reply">',
-									'after'			=>	'</p>'
-								) 
-							) 
-						); 
-					?>
+					comment_reply_link( array_merge( $args, array( 
+						'after'			=>	'</p>',
+						'before'		=>	'<p class="comment-reply">',
+						'depth'			=> 	$depth, 
+						'max_depth' 	=> 	$args['max_depth'],
+						'reply_text' 	=>  '<span class="fa fw fa-reply"></span>' . __( 'Reply', 'iwata' ), 
+					) ) ); 
 					
-					<?php edit_comment_link( '<span class="fa fw fa-cog"></span>' . __( 'Edit', 'iwata' ), '<p class="comment-edit">', '</p>' ); ?>
+					edit_comment_link( '<span class="fa fw fa-cog"></span>' . __( 'Edit', 'iwata' ), '<p class="comment-edit">', '</p>' ); 
+					
+					?>
 													
 				</div><!-- .comment-actions -->
 							
@@ -454,224 +430,101 @@ if ( ! function_exists( 'iwata_comment' ) ) {
 		<?php
 			break;
 		endswitch;
+
 	}
-}
+endif;
 
 
 /* ---------------------------------------------------------------------------------------------
-   IWATA THEME OPTIONS
-   --------------------------------------------------------------------------------------------- */
-
-
-class iwata_customize {
-
-   public static function iwata_register ( $wp_customize ) {
-   
-      //1. Define a new section (if desired) to the Theme Customizer
-      $wp_customize->add_section( 'iwata_options', 
-         array(
-            'title' => __( 'Options for Iwata', 'iwata' ), //Visible title of section
-            'priority' => 35, //Determines what order this appears in
-            'capability' => 'edit_theme_options', //Capability needed to tweak
-            'description' => __( 'Allows you to customize theme settings for Iwata.', 'iwata' ), //Descriptive tooltip
-         ) 
-      );
-      
-      //2. Register new settings to the WP database...
-      $wp_customize->add_setting( 'accent_color', //No need to use a SERIALIZED name, as `theme_mod` settings already live under one db record
-         array(
-            'default' => '#00A0D7', //Default setting/value to save
-            'type' => 'theme_mod', //Is this an 'option' or a 'theme_mod'?
-            'transport' => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
-      		'sanitize_callback' => 'sanitize_hex_color'
-         ) 
-      );
-      
-      //3. Finally, we define the control itself (which links a setting to a section and renders the HTML controls)...
-      $wp_customize->add_control( new WP_Customize_Color_Control( //Instantiate the color control class
-         $wp_customize, //Pass the $wp_customize object (required)
-         'iwata_accent_color', //Set a unique ID for the control
-         array(
-            'label' => __( 'Accent Color', 'iwata' ), //Admin-visible name of the control
-            'section' => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
-            'settings' => 'accent_color', //Which setting to load and manipulate (serialized is okay)
-            'priority' => 10, //Determines the order this control appears in for the specified section
-         ) 
-      ) );
-      
-      //4. We can also change built-in settings by modifying properties. For instance, let's make some stuff use live preview JS...
-      $wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
-      $wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-   }
-
-   public static function iwata_header_output() {
-      
-		echo '<!-- Customizer CSS -->';
-		echo '<style type="text/css">';
-			self::iwata_generate_css( 'body a', 'color', 'accent_color' );
-			self::iwata_generate_css( 'body a:hover', 'color', 'accent_color' );
-			self::iwata_generate_css( '.bg-accent', 'background', 'accent_color' );
-
-			self::iwata_generate_css( '.main-menu ul a:hover', 'color', 'accent_color' );
-			self::iwata_generate_css( '.post-title a:hover', 'color', 'accent_color' );
-
-			self::iwata_generate_css( '.post-content a', 'color', 'accent_color' );
-			self::iwata_generate_css( '.post-content a:hover', 'color', 'accent_color' );
-			self::iwata_generate_css( '.post-content blockquote:before', 'color', 'accent_color' );
-			self::iwata_generate_css( '.post-content a.more-link,', 'background', 'accent_color' );
-			self::iwata_generate_css( '.button', 'background', 'accent_color' );
-			self::iwata_generate_css( '.faux-button', 'background', 'accent_color' );
-			self::iwata_generate_css( 'input[type="submit"]', 'background', 'accent_color' );
-			self::iwata_generate_css( 'input[type="reset"]', 'background', 'accent_color' );
-			self::iwata_generate_css( 'input[type="button"]', 'background', 'accent_color' );
-			self::iwata_generate_css( '.post-content fieldset legend', 'background', 'accent_color' );
-
-			self::iwata_generate_css( '.post-content .has-accent-color', 'color', 'accent_color' );
-			self::iwata_generate_css( '.post-content .has-accent-background-color', 'background-color', 'accent_color' );
-
-			self::iwata_generate_css( '.comment-form input[type="submit"]', 'background', 'accent_color' );
-			self::iwata_generate_css( '#infinite-handle span', 'background', 'accent_color' );
-			self::iwata_generate_css( '.page-links a:hover', 'background', 'accent_color' );
-			self::iwata_generate_css( '.bypostauthor .avatar', 'border-color', 'accent_color' );
-			self::iwata_generate_css( '.comment-actions a', 'color', 'accent_color' );
-			self::iwata_generate_css( '.comment-actions a:hover', 'color', 'accent_color' );
-			self::iwata_generate_css( '.comment-header h4 a:hover', 'color', 'accent_color' );
-			self::iwata_generate_css( '#cancel-comment-reply-link', 'color', 'accent_color' );
-			self::iwata_generate_css( '.comments-nav a:hover', 'color', 'accent_color' );
-			self::iwata_generate_css( '.bypostauthor > .comment .avatar-container', 'background', 'accent_color' );
-
-			self::iwata_generate_css( '.to-the-top:hover', 'color', 'accent_color' );
-			self::iwata_generate_css( '.nav-toggle.active .bar', 'background', 'accent_color' );
-		echo '</style>';
-		echo '<!--/Customizer CSS-->';
-
-   }
-   
-   public static function iwata_live_preview() {
-      wp_enqueue_script( 'iwata-themecustomizer', get_template_directory_uri() . '/js/theme-customizer.js', array( 'jquery', 'customize-preview' ), '', true );
-   }
-
-   public static function iwata_generate_css( $selector, $style, $mod_name, $prefix = '', $postfix = '', $echo = true ) {
-      $return = '';
-      $mod = get_theme_mod($mod_name);
-      if ( ! empty( $mod ) ) {
-         $return = sprintf( '%s { %s:%s; }',
-            $selector,
-            $style,
-            $prefix.$mod.$postfix
-         );
-         if ( $echo ) {
-            echo $return;
-         }
-      }
-      return $return;
-    }
-}
-
-// Setup the Theme Customizer settings and controls...
-add_action( 'customize_register', array( 'iwata_customize', 'iwata_register' ) );
-
-// Output custom CSS to live site
-add_action( 'wp_head', array( 'iwata_customize', 'iwata_header_output' ) );
-
-// Enqueue live preview javascript in Theme Customizer admin screen
-add_action( 'customize_preview_init', array( 'iwata_customize', 'iwata_live_preview' ) );
-
-
-/* ---------------------------------------------------------------------------------------------
-   SPECIFY GUTENBERG SUPPORT
+   SPECIFY BLOCK EDITOR SUPPORT
 ------------------------------------------------------------------------------------------------ */
 
+if ( ! function_exists( 'iwata_add_block_editor_features' ) ) :
+	function iwata_add_block_editor_features() {
 
-if ( ! function_exists( 'iwata_add_gutenberg_features' ) ) :
-
-	function iwata_add_gutenberg_features() {
-
-		/* Gutenberg Features --------------------------------------- */
+		/* Block Editor Features ------------- */
 
 		add_theme_support( 'align-wide' );
 
-		/* Gutenberg Palette --------------------------------------- */
+		/* Block Editor Palette -------------- */
 
-		$accent_color = get_theme_mod( 'accent_color' ) ? get_theme_mod( 'accent_color' ) : '#00A0D7';
+		$accent_color = get_theme_mod( 'accent_color', '#00A0D7' );
 
 		add_theme_support( 'editor-color-palette', array(
 			array(
-				'name' 	=> _x( 'Accent', 'Name of the accent color in the Gutenberg palette', 'iwata' ),
+				'name' 	=> _x( 'Accent', 'Name of the accent color in the Block Editor palette', 'iwata' ),
 				'slug' 	=> 'accent',
 				'color' => $accent_color,
 			),
 			array(
-				'name' 	=> _x( 'Black', 'Name of the black color in the Gutenberg palette', 'iwata' ),
+				'name' 	=> _x( 'Black', 'Name of the black color in the Block Editor palette', 'iwata' ),
 				'slug' 	=> 'black',
 				'color' => '#333',
 			),
 			array(
-				'name' 	=> _x( 'Dark Gray', 'Name of the dark gray color in the Gutenberg palette', 'iwata' ),
+				'name' 	=> _x( 'Dark Gray', 'Name of the dark gray color in the Block Editor palette', 'iwata' ),
 				'slug' 	=> 'dark-gray',
 				'color' => '#555',
 			),
 			array(
-				'name' 	=> _x( 'Medium Gray', 'Name of the medium gray color in the Gutenberg palette', 'iwata' ),
+				'name' 	=> _x( 'Medium Gray', 'Name of the medium gray color in the Block Editor palette', 'iwata' ),
 				'slug' 	=> 'medium-gray',
 				'color' => '#777',
 			),
 			array(
-				'name' 	=> _x( 'Light Gray', 'Name of the light gray color in the Gutenberg palette', 'iwata' ),
+				'name' 	=> _x( 'Light Gray', 'Name of the light gray color in the Block Editor palette', 'iwata' ),
 				'slug' 	=> 'light-gray',
 				'color' => '#999',
 			),
 			array(
-				'name' 	=> _x( 'White', 'Name of the white color in the Gutenberg palette', 'iwata' ),
+				'name' 	=> _x( 'White', 'Name of the white color in the Block Editor palette', 'iwata' ),
 				'slug' 	=> 'white',
 				'color' => '#fff',
 			),
 		) );
 
-		/* Gutenberg Font Sizes --------------------------------------- */
+		/* Block Editor Font Sizes ----------- */
 
 		add_theme_support( 'editor-font-sizes', array(
 			array(
-				'name' 		=> _x( 'Small', 'Name of the small font size in Gutenberg', 'iwata' ),
-				'shortName' => _x( 'S', 'Short name of the small font size in the Gutenberg editor.', 'iwata' ),
+				'name' 		=> _x( 'Small', 'Name of the small font size in Block Editor', 'iwata' ),
+				'shortName' => _x( 'S', 'Short name of the small font size in the Block Editor editor.', 'iwata' ),
 				'size' 		=> 16,
 				'slug' 		=> 'small',
 			),
 			array(
-				'name' 		=> _x( 'Regular', 'Name of the regular font size in Gutenberg', 'iwata' ),
-				'shortName' => _x( 'M', 'Short name of the regular font size in the Gutenberg editor.', 'iwata' ),
+				'name' 		=> _x( 'Normal', 'Name of the regular font size in Block Editor', 'iwata' ),
+				'shortName' => _x( 'N', 'Short name of the regular font size in the Block Editor editor.', 'iwata' ),
 				'size' 		=> 18,
-				'slug' 		=> 'regular',
+				'slug' 		=> 'normal',
 			),
 			array(
-				'name' 		=> _x( 'Large', 'Name of the large font size in Gutenberg', 'iwata' ),
-				'shortName' => _x( 'L', 'Short name of the large font size in the Gutenberg editor.', 'iwata' ),
+				'name' 		=> _x( 'Large', 'Name of the large font size in Block Editor', 'iwata' ),
+				'shortName' => _x( 'L', 'Short name of the large font size in the Block Editor editor.', 'iwata' ),
 				'size' 		=> 24,
 				'slug' 		=> 'large',
 			),
 			array(
-				'name' 		=> _x( 'Larger', 'Name of the larger font size in Gutenberg', 'iwata' ),
-				'shortName' => _x( 'XL', 'Short name of the larger font size in the Gutenberg editor.', 'iwata' ),
+				'name' 		=> _x( 'Larger', 'Name of the larger font size in Block Editor', 'iwata' ),
+				'shortName' => _x( 'XL', 'Short name of the larger font size in the Block Editor editor.', 'iwata' ),
 				'size' 		=> 27,
 				'slug' 		=> 'larger',
 			),
 		) );
 
 	}
-	add_action( 'after_setup_theme', 'iwata_add_gutenberg_features' );
-
+	add_action( 'after_setup_theme', 'iwata_add_block_editor_features' );
 endif;
 
 
 /* ---------------------------------------------------------------------------------------------
-   GUTENBERG EDITOR STYLES
+   BLOCK EDITOR STYLES
    --------------------------------------------------------------------------------------------- */
 
-
 if ( ! function_exists( 'iwata_block_editor_styles' ) ) :
-
 	function iwata_block_editor_styles() {
 
+		$theme_version = wp_get_theme( 'iwata' )->get( 'Version' );
 		$dependencies = array();
 
 		/**
@@ -682,22 +535,13 @@ if ( ! function_exists( 'iwata_block_editor_styles' ) ) :
 		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'iwata' );
 
 		if ( 'off' !== $google_fonts ) {
-
-			// Register Google Fonts
 			wp_register_style( 'iwata-block-editor-styles-font', '//fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic,500italic,700italic', false, 1.0, 'all' );
 			$dependencies[] = 'iwata-block-editor-styles-font';
-
 		}
 
-		wp_register_style( 'iwata-block-editor-styles-genericons', get_stylesheet_directory_uri() . '/genericons/genericons.css' );
-		$dependencies[] = 'iwata-block-editor-styles-genericons';
-
 		// Enqueue the editor styles
-		wp_enqueue_style( 'iwata-block-editor-styles', get_theme_file_uri( '/iwata-gutenberg-editor-style.css' ), $dependencies, '1.0', 'all' );
+		wp_enqueue_style( 'iwata-block-editor-styles', get_theme_file_uri( '/assets/css/iwata-block-editor-styles.css' ), $dependencies, $theme_version, 'all' );
 
 	}
 	add_action( 'enqueue_block_editor_assets', 'iwata_block_editor_styles', 1 );
-
 endif;
-
-?>
