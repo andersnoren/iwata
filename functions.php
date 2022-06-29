@@ -100,17 +100,8 @@ if ( ! function_exists( 'iwata_load_style' ) ) :
 		$theme_version = wp_get_theme( 'iwata' )->get( 'Version' );
 		$dependencies = array();
 
-		/**
-		 * Translators: If there are characters in your language that are not
-		 * supported by the theme fonts, translate this to 'off'. Do not translate
-		 * into your own language.
-		 */
-		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'iwata' );
-
-		if ( 'off' !== $google_fonts ) {
-			wp_register_style( 'iwata_googleFonts', '//fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic,500italic,700italic' );
-			$dependencies[] = 'iwata_googleFonts';
-		}
+		wp_register_style( 'iwata_googleFonts', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
+		$dependencies[] = 'iwata_googleFonts';
 
 		wp_register_style( 'iwata_fontawesome', get_template_directory_uri() . '/assets/fonts/fa/css/font-awesome.css' );
 		$dependencies[] = 'iwata_fontawesome';
@@ -129,19 +120,7 @@ endif;
 if ( ! function_exists( 'iwata_add_editor_styles' ) ) :
 	function iwata_add_editor_styles() {
 
-		add_editor_style( 'assets/css/iwata-classic-editor-styles.css' );
-
-		/**
-		 * Translators: If there are characters in your language that are not
-		 * supported by the theme fonts, translate this to 'off'. Do not translate
-		 * into your own language.
-		 */
-		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'iwata' );
-
-		if ( 'off' !== $google_fonts ) {
-			$font_url = '//fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic,500italic,700italic';
-			add_editor_style( str_replace( ', ', '%2C', $font_url ) );
-		}
+		add_editor_style( array( 'assets/css/iwata-classic-editor-styles.css', 'assets/css/fonts.css' ) );
 
 	}
 	add_action( 'init', 'iwata_add_editor_styles' );
@@ -525,22 +504,9 @@ if ( ! function_exists( 'iwata_block_editor_styles' ) ) :
 	function iwata_block_editor_styles() {
 
 		$theme_version = wp_get_theme( 'iwata' )->get( 'Version' );
-		$dependencies = array();
 
-		/**
-		 * Translators: If there are characters in your language that are not
-		 * supported by the theme fonts, translate this to 'off'. Do not translate
-		 * into your own language.
-		 */
-		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'iwata' );
-
-		if ( 'off' !== $google_fonts ) {
-			wp_register_style( 'iwata-block-editor-styles-font', '//fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic,500italic,700italic', false, 1.0, 'all' );
-			$dependencies[] = 'iwata-block-editor-styles-font';
-		}
-
-		// Enqueue the editor styles
-		wp_enqueue_style( 'iwata-block-editor-styles', get_theme_file_uri( '/assets/css/iwata-block-editor-styles.css' ), $dependencies, $theme_version, 'all' );
+		wp_register_style( 'iwata-block-editor-styles-font', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
+		wp_enqueue_style( 'iwata-block-editor-styles', get_theme_file_uri( '/assets/css/iwata-block-editor-styles.css' ), array( 'iwata-block-editor-styles-font' ), $theme_version, 'all' );
 
 	}
 	add_action( 'enqueue_block_editor_assets', 'iwata_block_editor_styles', 1 );

@@ -4,9 +4,11 @@
 
 	<head>
 		
-		<meta http-equiv="Content-type" content="text/html;charset=<?php bloginfo( 'charset' ); ?>">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-		 
+		<meta http-equiv="content-type" content="<?php bloginfo( 'html_type' ); ?>" charset="<?php bloginfo( 'charset' ); ?>" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="profile" href="//gmpg.org/xfn/11">
+
 		<?php wp_head(); ?>
 	
 	</head>
@@ -30,7 +32,7 @@
 				<?php if ( get_bloginfo( 'title' ) ) : ?>
 			
 					<h2 class="blog-title">
-						<a href="<?php echo esc_url( home_url() ); ?>" rel="home"><?php echo esc_attr( get_bloginfo( 'title' ) ); ?></a>
+						<a href="<?php echo esc_url( home_url() ); ?>" rel="home"><?php echo get_bloginfo( 'title' ); ?></a>
 					</h2>
 					
 				<?php endif; ?>
