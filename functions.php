@@ -100,13 +100,13 @@ if ( ! function_exists( 'iwata_load_style' ) ) :
 		$theme_version = wp_get_theme( 'iwata' )->get( 'Version' );
 		$dependencies = array();
 
-		wp_register_style( 'iwata_googleFonts', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
+		wp_register_style( 'iwata_googleFonts', get_theme_file_uri( '/assets/css/fonts.css' ) );
 		$dependencies[] = 'iwata_googleFonts';
 
 		wp_register_style( 'iwata_fontawesome', get_template_directory_uri() . '/assets/fonts/fa/css/font-awesome.css' );
 		$dependencies[] = 'iwata_fontawesome';
 
-		wp_enqueue_style( 'iwata_style', get_stylesheet_uri(), $dependencies, $theme_version );
+		wp_enqueue_style( 'iwata_style', get_template_directory_uri() . '/style.css', $dependencies, $theme_version );
 
 	}
 	add_action( 'wp_print_styles', 'iwata_load_style' );
@@ -505,7 +505,7 @@ if ( ! function_exists( 'iwata_block_editor_styles' ) ) :
 
 		$theme_version = wp_get_theme( 'iwata' )->get( 'Version' );
 
-		wp_register_style( 'iwata-block-editor-styles-font', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
+		wp_register_style( 'iwata-block-editor-styles-font', get_theme_file_uri( '/assets/css/fonts.css' ) );
 		wp_enqueue_style( 'iwata-block-editor-styles', get_theme_file_uri( '/assets/css/iwata-block-editor-styles.css' ), array( 'iwata-block-editor-styles-font' ), $theme_version, 'all' );
 
 	}
