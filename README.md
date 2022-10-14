@@ -2,7 +2,7 @@
 
 Iwata is a clean, colorful and lightweight theme for bloggers. It features a responsive design, great typography, support for the aside, quote and image post formats, Block Editor support, editor styles, Jetpack Infinite Scroll, custom accent color, custom background color and custom header image.
 
-![Iwata](https://github.com/andersnoren/iwata/blob/main/screenshot.png)
+![Iwata](https://github.com/andersnoren/iwata/blob/master/screenshot.jpg)
 
 You can download the latest stable release of Iwata [from WordPress.org](https://wordpress.org/themes/iwata/).
 
